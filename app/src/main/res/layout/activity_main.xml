@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/password"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="com.abcd.bncserver.MainActivity">
+
+
+
+    <TextView
+        android:id="@+id/txtSlogan"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/slogan"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textColorHighlight="@color/colorPrimaryDark"
+        android:textColorLink="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        android:layout_marginBottom="160dp"
+        android:layout_above="@+id/btnSignIn"
+        android:layout_centerHorizontal="true" />
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btnSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="GET STARTED"
+        android:onClick="SignIn"
+        android:textColor="@android:color/black"
+        app:buttonColor="@color/btnSignActive"
+        app:cornerRadius="4dp"
+        app:shadowColor="@android:color/black"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        android:layout_marginBottom="28dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+
+
+</RelativeLayout>
