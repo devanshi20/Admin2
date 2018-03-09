@@ -22,11 +22,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".FoodList" />
         <activity android:name=".OrderStatus" />
-
-        <service
-            android:name=".ListenOrder"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>

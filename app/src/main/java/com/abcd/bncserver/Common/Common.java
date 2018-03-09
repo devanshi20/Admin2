@@ -17,13 +17,11 @@ public class Common {
 
     public static String codeConversion(String code)
     {
-        if (code.equals("0"))
+        if ("0".equals(code))
             return "Placed";
-        else if(code.equals("1"))
+        else if("1".equals(code))
             return "On The Way";
         else
             return "Shipped";
     }
-
-
 }

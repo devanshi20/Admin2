@@ -114,8 +114,6 @@ public class Home extends AppCompatActivity
 
         loadMenu();
 
-        Intent i=new Intent(Home.this,ListenOrder.class);
-        startService(i);
     }
 
     private void showDialog() {
