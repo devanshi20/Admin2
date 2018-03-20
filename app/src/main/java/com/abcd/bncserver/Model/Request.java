@@ -1,6 +1,5 @@
 package com.abcd.bncserver.Model;
 
-import java.lang.ref.SoftReference;
 import java.util.List;
 
 /**

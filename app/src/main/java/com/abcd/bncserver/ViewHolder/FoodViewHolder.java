@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.abcd.bncserver.Common.Common;
 import com.abcd.bncserver.Interface.ItemClickListener;
-import com.abcd.bncserver.Model.Food;
 import com.abcd.bncserver.R;
 
 /**

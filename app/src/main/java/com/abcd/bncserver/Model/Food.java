@@ -1,7 +1,5 @@
 package com.abcd.bncserver.Model;
 
-import android.util.EventLogTags;
-
 /**
  * Created by Karan Patel on 27-01-2018.
  */

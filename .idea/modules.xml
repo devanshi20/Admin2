@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/BnCAdmin.iml" filepath="$PROJECT_DIR$/BnCAdmin.iml" />
       <module fileurl="file://$PROJECT_DIR$/BnCServer.iml" filepath="$PROJECT_DIR$/BnCServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

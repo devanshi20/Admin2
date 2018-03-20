@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,7 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.rengwuxian.materialedittext.MaterialEditText;
+
+import io.paperdb.Paper;
 
 public class SignIn extends AppCompatActivity {
 
@@ -25,6 +27,34 @@ public class SignIn extends AppCompatActivity {
 
     FirebaseDatabase db;
     DatabaseReference users;
+    CheckBox ckbRemember;
+
+
+
+    public boolean validate() {
+        boolean valid = true;
+        String phone = edtPhone.getText().toString();
+        String password = edtPassword.getText().toString();
+
+
+        if (phone.isEmpty() ) {
+            edtPhone.setError("Invalid Id");
+            valid = false;
+        } else {
+            edtPhone.setError(null);
+        }
+
+        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+            edtPassword.setError("Invalid Password");
+            valid = false;
+        } else {
+            edtPassword.setError(null);
+        }
+
+        return valid;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +62,13 @@ public class SignIn extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
 
+
         edtPassword = (EditText) findViewById(R.id.edtpassword);
         edtPhone = (EditText) findViewById(R.id.edtphone);
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
+        ckbRemember = (CheckBox) findViewById(R.id.ckbRemember);
+        Paper.init(this);
+
 
 
         db = FirebaseDatabase.getInstance();
@@ -42,8 +76,21 @@ public class SignIn extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signInUser(edtPhone.getText().toString(), edtPassword.getText().toString());
-            }
+
+                String phone = edtPhone.getText().toString();
+                String password = edtPassword.getText().toString();
+                if (phone.isEmpty() && password.isEmpty()) {
+                    edtPhone.setError("Required");
+                    edtPassword.setError("Required");
+                }
+                else{
+                    if (ckbRemember.isChecked()) {
+                        Paper.book().write(Common.USER_KEY, edtPhone.getText().toString());
+                        Paper.book().write(Common.PWD_KEY, edtPassword.getText().toString());
+                    }
+
+                    signInUser(edtPhone.getText().toString(), edtPassword.getText().toString());
+            }}
         });
     }
 

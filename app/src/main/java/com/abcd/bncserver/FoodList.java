@@ -48,6 +48,7 @@ public class FoodList extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
 
+
     RelativeLayout rootLayout;
     Uri saveUri;
     FirebaseDatabase db;

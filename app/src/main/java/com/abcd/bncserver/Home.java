@@ -1,7 +1,6 @@
 package com.abcd.bncserver;
 
 import android.app.ProgressDialog;
-import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -38,7 +37,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
 
@@ -77,7 +75,7 @@ public class Home extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Menu Management");
+        toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
 
 
@@ -153,7 +151,6 @@ public class Home extends AppCompatActivity
                 dialog.dismiss();
                 if(newCategory !=null)
                 {
-
                     categories.push().setValue(newCategory);
                     Snackbar.make(drawer, "New Category" + newCategory.getName()+" " + " Added",Snackbar.LENGTH_SHORT).show();
                 }
@@ -281,9 +278,6 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -299,7 +293,13 @@ public class Home extends AppCompatActivity
             Intent orders=new Intent(Home.this,OrderStatus.class);
             startActivity(orders);
         }
+        else if(id==R.id.nav_signout)
+        {
+            Intent signIn=new Intent(Home.this,SignIn.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
 
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

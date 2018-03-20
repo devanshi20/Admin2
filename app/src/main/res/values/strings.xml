@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BnCServer</string>
+    <string name="app_name">Admin</string>
     <string name="slogan">BOOK n COOK</string>
     <string name="signin">SignIn</string>
     <string name="password">Password</string>
