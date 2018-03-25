@@ -89,55 +89,72 @@ public class SignIn extends AppCompatActivity {
                         Paper.book().write(Common.PWD_KEY, edtPassword.getText().toString());
                     }
 
-                    signInUser(edtPhone.getText().toString(), edtPassword.getText().toString());
+                    final ProgressDialog mDialog=new ProgressDialog(SignIn.this);
+                    mDialog.setMessage("Please wait");
+                    mDialog.show();
+
+                    final String localPhone=phone;
+                    final String localPassword=password;
+                    users.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.child(localPhone).exists())
+                            {
+                                mDialog.dismiss();
+
+                                User user= dataSnapshot.child(localPhone).getValue(User.class);
+                                user.setPhone(localPhone);
+                                if(Boolean.parseBoolean(user.getIsStaff()))
+                                {
+                                    if(user.getPassword().equals(localPassword))
+                                    {
+                                        Toast.makeText(SignIn.this, "Sign In Successfull", Toast.LENGTH_SHORT).show();
+                                        Common.currentUser = users;
+                                        Intent login=new Intent(SignIn.this,Home.class);
+                                        startActivity(login);
+                                        finish();
+                                    }
+                                    else
+                                        Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                    Toast.makeText(SignIn.this, "Please Login with Staff Account", Toast.LENGTH_SHORT).show();
+                            }
+
+                            else{
+                                mDialog.dismiss();
+                                Toast.makeText(SignIn.this, "User does not exist in database", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
             }}
         });
-    }
+        String user = Paper.book().read(Common.USER_KEY);
+        String pwd = Paper.book().read(Common.PWD_KEY);
 
-    private  void signInUser(String phone, String password){
-        final ProgressDialog mDialog=new ProgressDialog(SignIn.this);
-        mDialog.setMessage("Please wait");
-        mDialog.show();
+        if (user != null && pwd != null) {
 
-        final String localPhone=phone;
-        final String localPassword=password;
-        users.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(localPhone).exists())
-                {
-                    mDialog.dismiss();
+            if (!user.isEmpty() && !pwd.isEmpty()) {
+                Intent home = new Intent(SignIn.this, Home.class);
 
-                    User user= dataSnapshot.child(localPhone).getValue(User.class);
-                    user.setPhone(localPhone);
-                    if(Boolean.parseBoolean(user.getIsStaff()))
-                    {
-                        if(user.getPassword().equals(localPassword))
-                        {
-                            Toast.makeText(SignIn.this, "Sign In Successfull", Toast.LENGTH_SHORT).show();
-                            Common.currentUser = users;
-                            Intent login=new Intent(SignIn.this,Home.class);
-                            startActivity(login);
-                            finish();
-                        }
-                        else
-                            Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                        Toast.makeText(SignIn.this, "Please Login with Staff Account", Toast.LENGTH_SHORT).show();
-                }
+                startActivity(home);
 
-                else{
-                    mDialog.dismiss();
-                    Toast.makeText(SignIn.this, "User does not exist in database", Toast.LENGTH_SHORT).show();
-            }}
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+
+
+        }
+
 
     }
+
+
+
 }
 
